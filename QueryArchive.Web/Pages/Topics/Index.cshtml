@@ -1,0 +1,47 @@
+﻿@page
+@model QueryArchive.Web.Pages.Topics.IndexModel
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<h1>Topics</h1>
+
+<form method="get">
+    <input type="text" name="searchString" value="@Model.SearchString" placeholder="Search..." />
+    <input type="submit" value="Search" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Questions Count</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var topic in Model.Topics)
+        {
+            <tr>
+                <td>@topic.TopicID</td>
+                <td>@topic.Name</td>
+                <td>@topic.QuestionsCount</td>
+                <td>@topic.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@topic.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="?pageNumber=@i&searchString=@Model.SearchString">@i</a>
+            </li>
+        }
+    </ul>
+</div>

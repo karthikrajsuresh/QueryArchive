@@ -1,0 +1,27 @@
+﻿@page
+@model QueryArchive.Web.Pages.Answers.CreateModel
+@{
+    ViewData["Title"] = "Create Answer";
+}
+
+<h1>Create Answer</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label asp-for="Answer.Content" class="control-label"></label>
+        <textarea asp-for="Answer.Content" class="form-control"></textarea>
+        <span asp-validation-for="Answer.Content" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="File" class="control-label"></label>
+        <input type="file" asp-for="File" class="form-control-file" />
+        <span asp-validation-for="File" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-primary" />
+    </div>
+</form>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>

@@ -1,0 +1,52 @@
+﻿@page
+@model QueryArchive.Web.Pages.Answers.IndexModel
+@{
+    ViewData["Title"] = "Answers";
+}
+
+<h1>Answers</h1>
+
+<form method="get">
+    <input type="text" name="searchString" value="@Model.SearchString" placeholder="Search..." />
+    <input type="submit" value="Search" />
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Content</th>
+            <th>Attachment</th>
+            <th>Created Date</th>
+            <th>Updated Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var answer in Model.Answers)
+        {
+            <tr>
+                <td>@answer.AnswerID</td>
+                <td>@answer.Content</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(answer.Attachment))
+                    {
+                        <img src="data:image/jpeg;base64,@answer.Attachment" alt="Attachment" style="width:100px; height:auto;" />
+                    }
+                </td>
+                <td>@answer.CreatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+                <td>@answer.UpdatedDate.ToString("yyyy-MM-dd HH:mm:ss")</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <ul class="pagination">
+        @for (int i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(Model.CurrentPage == i ? "active" : "")">
+                <a class="page-link" href="?questionId=@Model.QuestionId&pageNumber=@i&searchString=@Model.SearchString">@i</a>
+            </li>
+        }
+    </ul>
+</div>

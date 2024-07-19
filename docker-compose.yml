@@ -1,0 +1,34 @@
+version: '4.32.0'
+
+services:
+  web:
+    image: queryarchive-web:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.Web
+    ports:
+      - "32785:80"  # Adjust if necessary
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ApiSettings__BaseUrl=http://api:8080, http://api:8081  # This should match the API service name and port
+    depends_on:
+      - api
+
+  api:
+    image: queryarchive-api:latest
+    build:
+      context: .
+      dockerfile: Dockerfile.Api
+    ports:
+      - "5000:80"  # Adjust if necessary
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__QueryArchiveDatabase=Server=db;Database=QueryArchive;Trusted_Connection=True;MultipleActiveResultSets=true
+
+  db:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    environment:
+      ACCEPT_EULA: "Y"
+      SA_PASSWORD: "YourStrong!Passw0rd"  # Use a strong password here
+    ports:
+      - "1433:1433"
