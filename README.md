@@ -6,13 +6,6 @@ QueryArchive is a web application designed to manage and interact with questions
 
 - [Project Overview](#project-overview)
 - [Features](#features)
-- [Installation](#installation)
-- [Configuration](#configuration)
-- [Usage](#usage)
-- [API Endpoints](#api-endpoints)
-- [Docker Setup](#docker-setup)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Project Overview
 
